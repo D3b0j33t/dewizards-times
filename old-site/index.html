@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DEWizards News Portal</title>
+  <link rel="icon" type="image/png" href="https://debojeet-bhowmick.netlify.app/images/logo.png" sizes="32x32" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Neon Background Elements -->
+  <div class="background-elements">
+    <div class="neon-circle circle-1"></div>
+    <div class="neon-circle circle-2"></div>
+    <div class="neon-circle circle-3"></div>
+  </div>
+
+  <!-- Glass Navbar -->
+  <nav class="navbar navbar-expand-lg glass-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://debojeet-bhowmick.netlify.app/images/logo.png" alt="DEWizards Logo" width="60" height="45">
+        <span class="ms-2 neon-text">DEWizards News</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" id="homeLink" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
+              Categories
+            </a>
+            <ul class="dropdown-menu glass-dropdown" aria-labelledby="categoriesDropdown">
+              <li data-category="general"><a class="dropdown-item" href="#">General</a></li>
+              <li data-category="business"><a class="dropdown-item" href="#">Business</a></li>
+              <li data-category="sports"><a class="dropdown-item" href="#">Sports</a></li>
+              <li data-category="entertainment"><a class="dropdown-item" href="#">Entertainment</a></li>
+              <li data-category="technology"><a class="dropdown-item" href="#">Technology</a></li>
+              <li data-category="science"><a class="dropdown-item" href="#">Science</a></li>
+              <li data-category="health"><a class="dropdown-item" href="#">Health</a></li>
+              <li data-category="politics"><a class="dropdown-item" href="#">Politics</a></li>
+              <li data-category="world"><a class="dropdown-item" href="#">World</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="trendsLink">Trending</a>
+          </li>
+        </ul>
+        
+        <!-- Search Form -->
+        <form class="d-flex search-form me-2">
+          <div class="input-group">
+            <input class="form-control glass-input" type="search" id="searchInput" placeholder="Search news...">
+            <button class="btn search-btn" type="submit" id="searchBtn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+        
+        <!-- Theme Toggle -->
+        <div class="theme-toggle">
+          <input type="checkbox" id="themeToggle" class="theme-input">
+          <label for="themeToggle" class="theme-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <div class="toggle-ball"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="neon-heading">Breaking News</h1>
+          <p class="lead glass-text">Stay updated with the latest news from around the world.</p>
+          <div class="date-badge">
+            <i class="far fa-calendar-alt"></i>
+            <span id="currentDate"></span>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="featured-article glass-card" id="featuredArticle">
+            <!-- Featured article will be loaded here -->
+            <div class="placeholder-content">
+              <div class="placeholder-image"></div>
+              <div class="placeholder-text">
+                <div class="placeholder-line"></div>
+                <div class="placeholder-line"></div>
+                <div class="placeholder-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Category Pills -->
+      <div class="category-pills mb-4">
+        <div class="pills-wrapper">
+          <button class="pill active" data-category="all">All</button>
+          <button class="pill" data-category="general">General</button>
+          <button class="pill" data-category="business">Business</button>
+          <button class="pill" data-category="technology">Tech</button>
+          <button class="pill" data-category="entertainment">Entertainment</button>
+          <button class="pill" data-category="sports">Sports</button>
+          <button class="pill" data-category="science">Science</button>
+          <button class="pill" data-category="health">Health</button>
+        </div>
+      </div>
+
+      <!-- News Heading -->
+      <div class="section-heading">
+        <h2 class="neon-subheading" id="newsHeading">Latest News</h2>
+        <div class="neon-underline"></div>
+      </div>
+
+      <!-- News Grid -->
+      <div class="row" id="newsGrid"></div>
+
+      <!-- Loading Spinner -->
+      <div id="loadingSpinner" class="spinner-container">
+        <div class="neon-spinner">
+          <div class="spinner-ring"></div>
+          <span>Loading...</span>
+        </div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-4 mb-5">
+        <button id="loadMoreBtn" class="neon-button">Load More</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section glass-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h3 class="neon-subheading mb-3">Subscribe to Our Newsletter</h3>
+          <p class="mb-4">Get the latest news delivered to your inbox daily</p>
+          <form class="newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control glass-input" placeholder="Enter your email">
+              <button class="btn neon-button" type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h4 class="neon-text mb-4">DEWizards News</h4>
+          <p class="glass-text">Your source for reliable and up-to-date news from around the globe.</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/dewizards_/" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Contact Info</h5>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> Ward No. 17, Retired Colony, Chakradharpur</li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:dewizards.com@gmail.com" style="text-decoration: none;">dewizards.com@gmail.com</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919835418245" style="text-decoration: none;">+91-9835418245</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="row">
+          <div class="col-12 text-center">
+            <p class="copyright">Copyright &copy;2025 Debojeet Bhowmick. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://debojeet-bhowmick.netlify.app/js/debojeet-security.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

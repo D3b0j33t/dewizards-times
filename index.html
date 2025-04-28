@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DEWizards News Portal</title>
+  <meta name="description" content="Stay updated with the latest news from around the world on DEWizards News Portal">
   <link rel="icon" type="image/png" href="https://debojeet-bhowmick.netlify.app/images/logo.png" sizes="32x32" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -19,11 +20,26 @@
 </head>
 
 <body>
-  <!-- Neon Background Elements -->
+  <!-- Background Elements -->
   <div class="background-elements">
     <div class="neon-circle circle-1"></div>
     <div class="neon-circle circle-2"></div>
     <div class="neon-circle circle-3"></div>
+  </div>
+
+  <!-- Breaking News Banner -->
+  <div id="breakingNewsBanner" class="breaking-news-banner">
+    <div class="container">
+      <div class="breaking-news-content">
+        <span class="breaking-label">Breaking News</span>
+        <div class="breaking-news-text">
+          <div id="breakingNewsMarquee" class="breaking-marquee"></div>
+        </div>
+        <button class="close-breaking" id="closeBreaking" aria-label="Close breaking news">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Glass Navbar -->
@@ -33,7 +49,7 @@
         <img src="https://debojeet-bhowmick.netlify.app/images/logo.png" alt="DEWizards Logo" width="60" height="45">
         <span class="ms-2 neon-text">DEWizards News</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarContent">
@@ -42,7 +58,7 @@
             <a class="nav-link active" id="homeLink" href="#">Home</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
             </a>
             <ul class="dropdown-menu glass-dropdown" aria-labelledby="categoriesDropdown">
@@ -60,22 +76,32 @@
           <li class="nav-item">
             <a class="nav-link" href="#" id="trendsLink">Trending</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="savedArticlesLink">Saved Articles</a>
+          </li>
         </ul>
         
         <!-- Search Form -->
         <form class="d-flex search-form me-2">
           <div class="input-group">
-            <input class="form-control glass-input" type="search" id="searchInput" placeholder="Search news...">
-            <button class="btn search-btn" type="submit" id="searchBtn">
+            <input class="form-control glass-input" type="search" id="searchInput" placeholder="Search news..." aria-label="Search news">
+            <button class="btn search-btn" type="submit" id="searchBtn" aria-label="Search">
               <i class="fas fa-search"></i>
             </button>
           </div>
         </form>
         
+        <!-- Reading Mode Toggle -->
+        <div class="reading-mode-toggle me-2">
+          <button id="readingModeToggle" class="btn btn-sm btn-outline-light" aria-label="Toggle reading mode">
+            <i class="fas fa-book-reader"></i>
+          </button>
+        </div>
+        
         <!-- Theme Toggle -->
         <div class="theme-toggle">
           <input type="checkbox" id="themeToggle" class="theme-input">
-          <label for="themeToggle" class="theme-label">
+          <label for="themeToggle" class="theme-label" aria-label="Toggle theme">
             <i class="fas fa-sun"></i>
             <i class="fas fa-moon"></i>
             <div class="toggle-ball"></div>
@@ -98,16 +124,27 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="featured-article glass-card" id="featuredArticle">
-            <!-- Featured article will be loaded here -->
-            <div class="placeholder-content">
-              <div class="placeholder-image"></div>
-              <div class="placeholder-text">
-                <div class="placeholder-line"></div>
-                <div class="placeholder-line"></div>
-                <div class="placeholder-line"></div>
+          <!-- Featured Carousel -->
+          <div id="featuredCarousel" class="carousel slide featured-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carouselInner">
+              <!-- Carousel items will be inserted here -->
+              <div class="placeholder-content">
+                <div class="placeholder-image"></div>
+                <div class="placeholder-text">
+                  <div class="placeholder-line"></div>
+                  <div class="placeholder-line"></div>
+                  <div class="placeholder-line"></div>
+                </div>
               </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
       </div>
@@ -135,6 +172,14 @@
       <div class="section-heading">
         <h2 class="neon-subheading" id="newsHeading">Latest News</h2>
         <div class="neon-underline"></div>
+      </div>
+      
+      <!-- Most Read Section -->
+      <div id="mostReadSection" class="most-read-section mb-5">
+        <h3 class="section-title">Most Read <i class="fas fa-chart-line ms-2"></i></h3>
+        <div class="row" id="mostReadGrid">
+          <!-- Most read articles will be inserted here -->
+        </div>
       </div>
 
       <!-- News Grid -->
@@ -164,7 +209,7 @@
           <p class="mb-4">Get the latest news delivered to your inbox daily</p>
           <form class="newsletter-form">
             <div class="input-group">
-              <input type="email" class="form-control glass-input" placeholder="Enter your email">
+              <input type="email" class="form-control glass-input" placeholder="Enter your email" aria-label="Email address" required>
               <button class="btn neon-button" type="submit">Subscribe</button>
             </div>
           </form>
@@ -181,10 +226,10 @@
           <h4 class="neon-text mb-4">DEWizards News</h4>
           <p class="glass-text">Your source for reliable and up-to-date news from around the globe.</p>
           <div class="social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/dewizards_/" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/dewizards_/" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
         <div class="col-md-4 mb-4 mb-md-0">
@@ -200,20 +245,100 @@
           <h5 class="mb-3">Contact Info</h5>
           <ul class="contact-info">
             <li><i class="fas fa-map-marker-alt"></i> Ward No. 17, Retired Colony, Chakradharpur</li>
-            <li><i class="fas fa-envelope"></i> <a href="mailto:dewizards.com@gmail.com" style="text-decoration: none;">dewizards.com@gmail.com</a></li>
-            <li><i class="fas fa-phone"></i> <a href="tel:+919835418245" style="text-decoration: none;">+91-9835418245</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:dewizards.com@gmail.com">dewizards.com@gmail.com</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919835418245">+91-9835418245</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="row">
           <div class="col-12 text-center">
-            <p class="copyright">Copyright &copy;2025 Debojeet Bhowmick. All rights reserved.</p>
+            <p class="copyright">Copyright &copy;<span id="currentYear"></span> Debojeet Bhowmick. All rights reserved.</p>
           </div>
         </div>
       </div>
     </div>
   </footer>
+  
+  <!-- Article View Modal -->
+  <div class="modal fade" id="articleViewModal" tabindex="-1" aria-labelledby="articleViewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content glass-card">
+        <div class="modal-header">
+          <h5 class="modal-title" id="articleViewModalLabel">Article</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="articleModalBody">
+          <!-- Article content will be inserted here -->
+        </div>
+        <div class="modal-footer">
+          <div class="article-actions">
+            <button class="btn action-btn" id="speakArticleBtn" aria-label="Text-to-speech">
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <button class="btn action-btn" id="shareArticleBtn" aria-label="Share article">
+              <i class="fas fa-share-alt"></i>
+            </button>
+            <button class="btn action-btn" id="bookmarkArticleBtn" aria-label="Save for later">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Share Modal -->
+  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-card">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shareModalLabel">Share Article</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="share-buttons">
+            <button class="btn share-btn twitter-share" aria-label="Share on Twitter">
+              <i class="fab fa-twitter"></i> Twitter
+            </button>
+            <button class="btn share-btn facebook-share" aria-label="Share on Facebook">
+              <i class="fab fa-facebook-f"></i> Facebook
+            </button>
+            <button class="btn share-btn linkedin-share" aria-label="Share on LinkedIn">
+              <i class="fab fa-linkedin-in"></i> LinkedIn
+            </button>
+            <button class="btn share-btn whatsapp-share" aria-label="Share on WhatsApp">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+          </div>
+          <div class="mt-3">
+            <label for="shareLink" class="form-label">Copy Link</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="shareLink" readonly>
+              <button class="btn btn-outline-secondary copy-link-btn" type="button" aria-label="Copy link">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="fas fa-bell me-2"></i>
+        <strong class="me-auto" id="toastTitle">Notification</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="toastMessage">
+        <!-- Message content will be inserted here -->
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="https://debojeet-bhowmick.netlify.app/js/debojeet-security.js"></script>
