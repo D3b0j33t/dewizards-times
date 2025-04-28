@@ -651,7 +651,7 @@ body.light-mode .pill.active {
 
 /* News Cards */
 .news-card {
-  height: 450px;
+  height: 600px;
   margin-bottom: 30px;
   overflow: hidden;
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
@@ -669,7 +669,7 @@ body.light-mode .news-card:hover {
 }
 
 .news-img-container {
-  height: 250px;
+  height: 200px;
   overflow: hidden;
   position: relative;
 }
