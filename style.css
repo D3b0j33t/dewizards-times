@@ -129,7 +129,7 @@ body.light-mode {
   box-shadow: var(--shadow-dark);
   transition: all var(--transition-speed) ease;
   overflow: hidden;
-  height: 100%;
+  height: fit-content;
 }
 
 .glass-dropdown {
@@ -481,7 +481,7 @@ body.light-mode .date-badge {
 }
 
 .featured-article {
-  height: 350px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -651,7 +651,7 @@ body.light-mode .pill.active {
 
 /* News Cards */
 .news-card {
-  height: 550px;
+  height: 580px;
   margin-bottom: 30px;
   overflow: hidden;
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
@@ -963,7 +963,7 @@ body.light-mode .error-message {
   }
   
   .featured-article {
-    height: 320px;
+    height: 380px;
   }
   
   .news-card {
@@ -985,11 +985,11 @@ body.light-mode .error-message {
   }
   
   .featured-article {
-    height: 300px;
+    height: 360px;
   }
   
   .featured-article .article-img {
-    height: 150px;
+    height: 180px;
   }
   
   .news-card {
