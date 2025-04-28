@@ -669,7 +669,7 @@ body.light-mode .news-card:hover {
 }
 
 .news-img-container {
-  height: 200px;
+  height: 250px;
   overflow: hidden;
   position: relative;
 }
