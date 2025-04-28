@@ -1,6 +1,6 @@
 // Constants and Configuration
 // const API_KEY = "526O6sHKAhweBxQCqlf8ZJRrWwecVBioFH3nDEcD"; // Default API key for development
-const API_KEY = process.env.API_KEY;
+const API_KEY = "JzEMV8d3ajCCAj5UfctPpjYg4k6TCigTqfk5byNm" || "526O6sHKAhweBxQCqlf8ZJRrWwecVBioFH3nDEcD";
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 const BREAKING_NEWS_REFRESH = 5 * 60 * 1000; // 5 minutes
 
