@@ -651,7 +651,7 @@ body.light-mode .pill.active {
 
 /* News Cards */
 .news-card {
-  height: 600px;
+  height: 550px;
   margin-bottom: 30px;
   overflow: hidden;
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
